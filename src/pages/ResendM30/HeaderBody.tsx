@@ -96,7 +96,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
     return (
         <div style={{backgroundColor:'white',padding:'3vh 1vw'}}>
             <div>
-                <Button onClick={navigatetonext} style={{width:'13.698vw',height:'5.185vh',color:'#FFFFFF',backgroundColor:'#292929',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
+                <Button onClick={navigatetonext}  style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
                     ตรวจสอบ Signal M4
                 </Button>
                 <Button onClick={navigatetonextm1} style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
@@ -105,7 +105,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
                 <Button onClick={navigatetonextm5} style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
                     ตรวจสอบ Signal M5
                 </Button>
-                <Button onClick={navigatetonextm30} style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
+                <Button onClick={navigatetonextm30} style={{width:'13.698vw',height:'5.185vh',color:'#FFFFFF',backgroundColor:'#292929',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
                     ตรวจสอบ Signal M30
                 </Button>
                 <Button onClick={navigatetonextvip} style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>

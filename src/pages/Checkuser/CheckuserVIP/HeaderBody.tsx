@@ -37,7 +37,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
     };
 
     const navigatetoresend = () => {
-        navigate('/resendm4');
+        navigate('/resendvip');
     };
 
     const Card = () => (
@@ -63,7 +63,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
     const Card3 = () => (
         <div>
             <div style={{backgroundColor:'white',color:'#292929',width:'17.708vw',height:'14.537vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
-                <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>ส่งข้อความ M4</p>
+                <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>ส่งข้อความ VIP</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>ข้อความ ใน 1 วัน</p>
                 <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>2</p>
             </div>
@@ -93,7 +93,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
     return (
         <div style={{backgroundColor:'white',padding:'3vh 1vw'}}>
             <div>
-                <Button onClick={navigatetonext} style={{width:'13.698vw',height:'5.185vh',color:'#FFFFFF',backgroundColor:'#292929',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
+                <Button onClick={navigatetonext} style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
                     ตรวจสอบ Signal M4
                 </Button>
                 <Button onClick={navigatetonextm1} style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
@@ -105,7 +105,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
                 <Button onClick={navigatetonextm30} style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
                     ตรวจสอบ Signal M30
                 </Button>
-                <Button onClick={navigatetonextvip} style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
+                <Button onClick={navigatetonextvip} style={{width:'13.698vw',height:'5.185vh',color:'#FFFFFF',backgroundColor:'#292929',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
                     ตรวจสอบ Signal VIP
                 </Button>
             </div>

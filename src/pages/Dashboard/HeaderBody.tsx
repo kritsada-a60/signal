@@ -24,7 +24,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
 
     const Card = () => (
         <div>
-            <div style={{backgroundColor:'#FFFFFF',color:'#292929',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'1px solid #4E4E4E'}}>
+            <div style={{backgroundColor:'#FEC52F',color:'#292929',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'0px solid #4E4E4E'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>Signal - M1</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนเงินสุทธิ(บาท)</p>
                 <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>20,000</p>
@@ -34,7 +34,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
 
     const Card2 = () => (
         <div>
-            <div style={{backgroundColor:'#FFFFFF',color:'#292929',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'1px solid #4E4E4E'}}>
+            <div style={{backgroundColor:'#FEC52F',color:'#292929',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'0px solid #4E4E4E'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>Signal - M5</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนเงินสุทธิ(บาท)</p>
                 <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>0</p>
@@ -44,7 +44,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
 
     const Card3= () => (
         <div>
-            <div style={{backgroundColor:'#FFFFFF',color:'#292929',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'1px solid #4E4E4E'}}>
+            <div style={{backgroundColor:'#FEC52F',color:'#292929',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'0px solid #4E4E4E'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>Signal - M4</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนเงินสุทธิ(บาท)</p>
                 <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>23,015</p>
@@ -54,7 +54,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
 
     const Card4 = () => (
         <div>
-            <div style={{backgroundColor:'#FFFFFF',color:'#292929',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'1px solid #4E4E4E'}}>
+            <div style={{backgroundColor:'#FEC52F',color:'#292929',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'0px solid #4E4E4E'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>Signal - M30</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนเงินสุทธิ(บาท)</p>
                 <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>0</p>
@@ -64,7 +64,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
 
     const Card5 = () => (
         <div>
-            <div style={{backgroundColor:'#FFFFFF',color:'#292929',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'1px solid #4E4E4E'}}>
+            <div style={{backgroundColor:'#FEC52F',color:'#292929',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'0px solid #4E4E4E'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>Signal - VIP</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนเงินสุทธิ(บาท)</p>
                 <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>0</p>

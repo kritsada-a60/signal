@@ -13,7 +13,14 @@ import ResendM1Page from './pages/ResendM1/Resend';
 import ResendM5Page from './pages/ResendM5/Resend';
 import ResendM30Page from './pages/ResendM30/Resend';
 import ResendVIPPage from './pages/ResendVIP/Resend';
+import ReceivePage from './pages/Received/Received';
 import LoginPage from './pages/LoginPage/Login';
+
+import SendPage from './pages/SendMassage/send/send';
+import SendM1Page from './pages/SendMassage/sendM1/send';
+import SendM5Page from './pages/SendMassage/sendM5/send';
+import SendM30Page from './pages/SendMassage/sendM30/send';
+import SendVIPPage from './pages/SendMassage/sendVIP/send';
 
 
 export interface IApplicationProps {}
@@ -34,6 +41,13 @@ const Application: React.FunctionComponent<IApplicationProps> = () => {
                 <Route path="/resendm5" element={<ResendM5Page />} />
                 <Route path="/resendm30" element={<ResendM30Page />} />
                 <Route path="/resendvip" element={<ResendVIPPage />} />
+                <Route path="/receive" element={<ReceivePage />} />
+                <Route path="/sendm4" element={<SendPage/>} />
+                <Route path="/sendm1" element={<SendM1Page/>} />
+                <Route path="/sendm5" element={<SendM5Page/>} />
+                <Route path="/sendm30" element={<SendM30Page/>} />
+                <Route path="/sendmvip" element={<SendVIPPage/>} />
+
             </Routes>
         </BrowserRouter>
     );

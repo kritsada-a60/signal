@@ -40,6 +40,10 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
         navigate('/resendm4');
     };
 
+    const navigatetosend = () => {
+        navigate('/sendm4');
+    };
+
     const Card = () => (
         <div>
             <div style={{backgroundColor:'#8CABD8',color:'white',width:'17.708vw',height:'14.537vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
@@ -72,7 +76,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
 
     const Card4 = () => (
         <div>
-            <div style={{backgroundColor:'#51D456',color:'white',width:'17.708vw',height:'14.537vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
+            <div onClick={navigatetosend} style={{backgroundColor:'#51D456',color:'white',width:'17.708vw',height:'14.537vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',cursor:'pointer'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>ข้อความที่ได้รับ</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนข้อความ</p>
                 <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>10</p>

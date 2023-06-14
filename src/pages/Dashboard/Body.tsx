@@ -42,6 +42,24 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
     fetchData();
     }, []);
 
+    const [apiData, setApiData] = useState<any[]>([]);
+
+
+    useEffect(() => {
+        const fetchData2 = async () => {
+            try {
+            const response = await axios.post('https://signal-test.herokuapp.com/payments/list',{
+                sdate:"2023-06-01",
+                edate:"2023-09-31"
+            });
+            setApiData(response.data.data)
+            console.log(response.data.data,'PBIG');
+            } catch (error) {
+            console.error(error,'PBIG');
+            }
+        };
+        fetchData2();
+    }, []);
 
 
     const LS = localStorage;
@@ -56,6 +74,15 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
         item.Tax.toFixed(2),
         item.Vax.toFixed(2),
         item.Price.toFixed(2),
+    ]);
+
+    const dataPBIG = apiData.map((item) => [
+        item.sc_name,
+        item.pd_title,
+        item.pm_trx_qr_datetime,
+        item.pm_rate.toFixed(2),
+        item.pd_price.toFixed(2),
+        item.pm_bath.toFixed(2),
     ]);
 
     const Testdata3 = data
@@ -92,6 +119,11 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
     const totalAmountVIP = data
         .filter(item => item.SignalName === "VIP")
         .reduce((sum, item) => sum + item.Price, 0);
+
+    const totalAmountM4Pbig = apiData
+        .filter(item => item.sc_name === "M5 (M4)")
+        .reduce((sum, item) => sum + item.pm_bath, 0);
+
     const Testcolumns = [
         `Signal (${signalCount})`,
         'Package',
@@ -181,12 +213,12 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
         <div style={{borderRadius:'0'}}>
             <div style={{ display: 'flex', justifyContent: 'flex-start' ,borderRadius:'0'}}>
                 <div style={{ width: '100%' ,borderRadius:'0'}}>
-                    <HeaderBody totalAmount={totalAmount} totalAmountM4={totalAmountM4} totalAmountM5={totalAmountM5} totalAmountM30={totalAmountM30} totalAmountVIP={totalAmountVIP}/>
+                    <HeaderBody totalAmount={totalAmount} totalAmountM4={totalAmountM4} totalAmountM5={totalAmountM5} totalAmountM30={totalAmountM30} totalAmountVIP={totalAmountVIP} totalAmountM4Pbig={totalAmountM4Pbig}/>
                     <div className="custom-responsive-table">
                         <ThemeProvider theme={getMuiTheme2()}>
                         <MUIDataTable
                             title={'DeshBoard'}
-                            data={Testdata2}
+                            data={dataPBIG}
                             columns={Testcolumns}
                             options={options}
                         />

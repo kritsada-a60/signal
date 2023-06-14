@@ -30,25 +30,63 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
     const [data, setData] = useState<any[]>([]);
 
     useEffect(() => {
-    const fetchData = async () => {
-        try {
-        const response = await axios.get('http://localhost:4000/images');
-        setData(response.data)
-        console.log(response.data);
-        } catch (error) {
-        console.error(error);
-        }
-    };
-    
-    fetchData();
+        const fetchData = async () => {
+            try {
+            const response = await axios.get('http://localhost:4000/images');
+            setData(response.data)
+            console.log(response.data);
+            } catch (error) {
+            console.error(error);
+            }
+        };
+        
+        fetchData();
     }, []);
 
-    const filteredData = data.filter(item => item.SignalName === "M4");
 
-    const Testdata2 = data.map((item) => [
-        item.UID,
-        <img src={`http://localhost:4000/api/image/${item.Image}`} alt="Image" style={{ width: '100px', height: 'auto' }} />,
+    const [apiData, setApiData] = useState<any[]>([]);
+
+
+    useEffect(() => {
+        const fetchData2 = async () => {
+            try {
+            const response = await axios.post('https://signal-test.herokuapp.com/payments/list',{
+                sdate:"2023-06-01",
+                edate:"2023-09-31"
+            });
+            setApiData(response.data.data)
+            console.log(response.data.data,'PBIG');
+            } catch (error) {
+            console.error(error,'PBIG');
+            }
+        };
+        fetchData2();
+    }, []);
+
+
+    const Testdata2 = apiData.map((item) => [
+        // item.UID,
+        // <img src={`http://localhost:4000/api/image/${item.Image}`} alt="Image" style={{ width: '100px', height: 'auto' }} />,
+        item.c_uid,
+        item.c_displayname,
+        item.pms_name,
+        
     ]);
+
+    const Testdata3 = apiData.map((item) => {
+        const newData = [
+            item.c_uid,
+            item.c_displayname,
+            item.pms_name,
+        ];
+
+        // if (item.pms_name === "รอชำระ") {
+        //     newData.push(item.c_uid);
+        // }
+        
+
+        return newData;
+    });
 
     console.log(Testdata2,'check')
 
@@ -58,7 +96,34 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
         'UUID-LINE',
         'Name',
         'Status',
-        'แอคชั่น',
+        'รูป',
+        {
+            name: 'แอคชั่น',
+            options: {
+                filter: false,
+                sort: false,
+                customBodyRenderLite: (dataIndex: any, rowIndex: any) => {
+                    const isBlock = apiData[dataIndex].pms_name === 'ชำระแล้ว';
+                    return (
+                        <div style={{ display: 'flex' , gap: '0vw 0.5vw'}}>
+                            <Button
+                                disabled={isBlock}
+                                style={{
+                                    backgroundColor: isBlock ? 'gray' : 'black',
+                                    color: 'white',
+                                    borderRadius: '1vh',
+                                    textAlign: 'center',
+                                    boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',
+                                    padding: '0.6vh 0.5vw'
+                                }}
+                            >
+                                {isBlock ? 'ปกติ' : 'ส่ง'}
+                            </Button>
+                        </div>
+                    );
+                }
+            }
+        },
     ];
 
     const Testdata = [
@@ -112,7 +177,7 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
                     <ThemeProvider theme={getMuiTheme()}>
                         <MUIDataTable
                             title={'DeshBoard'}
-                            data={Testdata2}
+                            data={Testdata3}
                             columns={Testcolumns2}
                             options={options}
                         />

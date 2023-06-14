@@ -69,13 +69,15 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
     const MembersignalCountM30 = data2.filter(item => item.SignalName === "M30").length;
     const MembersignalCountVIP = data2.filter(item => item.SignalName === "VIP").length;
 
+    const MembersignalCountM4Pbig = dataPbig.filter(item => item.sc_name === "M5 (M4)").length;
+
     const Card = () => (
         <div style={{display:'flex',marginTop:'2vh'}}>
             <div style={{width:"70%",fontSize:'1.5rem'}}>
                 Signal - M4
             </div>
             <div style={{width:"10%",fontSize:'1.5rem',color:"#FEC52F",fontWeight:'bold',display:'flex',justifyContent:'flex-end'}}>
-                {MembersignalCountM4}
+                {MembersignalCountM4Pbig}
             </div>
             <div style={{width:"20%",fontSize:'1rem',display:'flex',justifyContent:'flex-end'}}>
                 ครั้งสะสม
@@ -154,15 +156,16 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
                 <div style={{display: 'flex',justifyContent:'space-between',alignItems:'center',fontSize:'1vw'}}>
                     {/* <Title text="การใช้งาน Signal" /> */}
                     <span>การใช้งาน Signal</span>
-                    <span>จำนวนครั้งสะสมรวม <span style={{color:'#FEC52F',fontSize:'1vw'}}>{MembersignalCountM1+MembersignalCountM4+MembersignalCountM5+MembersignalCountM30+MembersignalCountVIP}</span> ครั้ง</span>
+                    {/* <span>จำนวนครั้งสะสมรวม <span style={{color:'#FEC52F',fontSize:'1vw'}}>{MembersignalCountM1+MembersignalCountM4+MembersignalCountM5+MembersignalCountM30+MembersignalCountVIP}</span> ครั้ง</span> */}
+                    <span>จำนวนครั้งสะสมรวม <span style={{color:'#FEC52F',fontSize:'1vw'}}>{MembersignalCountM4Pbig}</span> ครั้ง</span>
                 </div>
                 <Animation />
                 </Chart>
                 <Card/>
-                <Card2/>
+                {/* <Card2/>
                 <Card3/>
                 <Card4/>
-                <Card5/>
+                <Card5/> */}
             </Paper>
         </div>
     );
@@ -170,11 +173,11 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
     const LS = localStorage;
 
     const data = [
-        { type: 'M1', count: MembersignalCountM1 },
-        { type: 'M4', count: MembersignalCountM4 },
-        { type: 'M5', count: MembersignalCountM5 },
-        { type: 'M30', count: MembersignalCountM30 },
-        { type: 'VIP', count: MembersignalCountVIP },
+        { type: 'M1', count: 0 },
+        { type: 'M4', count: MembersignalCountM4Pbig },
+        { type: 'M5', count: 0 },
+        { type: 'M30', count: 0 },
+        { type: 'VIP', count: 0 },
     ];
 
 

@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { Typography } from "@mui/material";
-import Header from "../Header"
+import Header from "../../Header"
 import Body from "./Body"
 import HeaderBody from "./HeaderBody"
 

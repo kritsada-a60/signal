@@ -9,11 +9,11 @@ import CheckuserM1Page from './pages/Checkuser/CheckuserM1/Checkuser';
 import CheckuserM5Page from './pages/Checkuser/CheckuserM5/Checkuser';
 import CheckuserM30Page from './pages/Checkuser/CheckuserM30/Checkuser';
 import CheckuserVIPPage from './pages/Checkuser/CheckuserVIP/Checkuser';
-import ResendPage from './pages/Resend/Resend';
-import ResendM1Page from './pages/ResendM1/Resend';
-import ResendM5Page from './pages/ResendM5/Resend';
-import ResendM30Page from './pages/ResendM30/Resend';
-import ResendVIPPage from './pages/ResendVIP/Resend';
+import ResendPage from './pages/Resends/Resend/Resend';
+import ResendM1Page from './pages/Resends/ResendM1/Resend';
+import ResendM5Page from './pages/Resends/ResendM5/Resend';
+import ResendM30Page from './pages/Resends/ResendM30/Resend';
+import ResendVIPPage from './pages/Resends/ResendVIP/Resend';
 import ReceivePage from './pages/Received/Received';
 import LoginPage from './pages/LoginPage/Login';
 

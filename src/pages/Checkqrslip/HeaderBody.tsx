@@ -7,10 +7,16 @@ import Button from '@mui/material/Button';
 import { Typography } from "@mui/material";
 import { useParams, useNavigate } from 'react-router-dom';
 
-export interface IHeaderBodyProps {}
+export interface IHeaderBodyProps {
+    activeCount: number;
+    unactiveCount: number;
+    massageCountTotal: number;
+    messageReceivedTotal: number;
+    messageMissedTotal: number;
+}
 
 
-const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
+const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = ({ activeCount , unactiveCount , massageCountTotal , messageReceivedTotal , messageMissedTotal }) =>  {
   
     const LS = localStorage;
 
@@ -49,7 +55,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
             <div style={{backgroundColor:'#8CABD8',color:'white',width:'17.708vw',height:'14.537vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>Active</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>Package : User</p>
-                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>2</p>
+                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{activeCount}</p>
             </div>
         </div>
     );
@@ -59,17 +65,18 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
             <div style={{backgroundColor:'#4E4E4E',color:'white',width:'17.708vw',height:'14.537vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>Inactive</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>Package : User</p>
-                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>5</p>
+                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{unactiveCount}</p>
             </div>
         </div>
     );
+
 
     const Card3 = () => (
         <div>
             <div style={{backgroundColor:'white',color:'#292929',width:'17.708vw',height:'14.537vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>ส่งข้อความ M4</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>ข้อความ ใน 1 วัน</p>
-                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>2</p>
+                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{massageCountTotal}</p>
             </div>
         </div>
     );
@@ -79,7 +86,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
             <div onClick={navigatetosend} style={{backgroundColor:'#51D456',color:'white',width:'17.708vw',height:'14.537vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',cursor:'pointer'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>ข้อความที่ได้รับ</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนข้อความ</p>
-                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>10</p>
+                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{messageReceivedTotal}</p>
             </div>  
         </div>
     );
@@ -89,7 +96,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
             <div onClick={navigatetoresend} style={{backgroundColor:'#D21E1E',color:'white',width:'17.708vw',height:'14.537vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',cursor:'pointer'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>ข้อความที่ไม่ได้รับ</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนข้อความ</p>
-                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>5</p>
+                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{messageMissedTotal}</p>
             </div>
         </div>
     );

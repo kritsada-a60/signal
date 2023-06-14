@@ -41,6 +41,7 @@ function ResponsiveAppBar() {
     const pages = [
         { page: 'Dashboard', link: 'dashboard' },
         { page: 'ตรวจสอบผูัใช้งาน', link: 'checkuser' },
+        { page: 'ตรวจสอบการสั่งซื้อ/โอนเงิน/อนุมัติ', link: 'checkqrslip' }
     ];
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);

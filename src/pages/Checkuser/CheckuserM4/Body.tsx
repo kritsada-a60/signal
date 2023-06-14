@@ -27,6 +27,7 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
     const navigatea = () => {
         navigate('/deshboard');
     };
+
     const [data, setData] = useState<any[]>([]);
 
     useEffect(() => {
@@ -43,7 +44,7 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
     fetchData();
     }, []);
 
-    const filteredData = data.filter(item => item.SignalName === "M5");
+    const filteredData = data.filter(item => item.SignalName === "M4");
 
     const Testdata2 = filteredData.map((item) => [
         item.UID,
@@ -61,14 +62,14 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
     console.log(Testdata2,'check')
 
     const activeCount = data.reduce((count, item) => {
-        if (item.Status === "Active" && item.SignalName === "M5") {
+        if (item.Status === "Active" && item.SignalName === "M4") {
             return count + 1;
         }
         return count;
     }, 0);
 
     const unactiveCount = data.reduce((count, item) => {
-        if (item.Status === "UnActive" && item.SignalName === "M5") {
+        if (item.Status === "UnActive" && item.SignalName === "M4") {
             return count + 1;
         }
         return count;
@@ -77,7 +78,8 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
     const massageCountTotal = filteredData.reduce((total, item) => total + item.MassageCount, 0);
     const messageReceivedTotal = filteredData.reduce((total, item) => total + parseInt(item.MessageReceived), 0);
     const messageMissedTotal = filteredData.reduce((total, item) => total + parseInt(item.MessageMissed), 0);
-
+    
+    console.log(massageCountTotal,"M4")
     const Testcolumns = [
         'UUID-LINE',
         'Name',
@@ -87,15 +89,77 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
         'รูปแบบเริ่มใช้งาน',
         'วันที่ที่เริ่มใช้งาน',
         'วันที่สิ้นสุด',
-        'Status',
-        'แอคชั่น',
+        // 'Status',
+        {
+            name: 'Status',
+            options: {
+                filter: false,
+                sort: false,
+                customBodyRenderLite: (dataIndex: any, rowIndex: any) => {
+                    const isActive = filteredData[dataIndex].Status === 'Active';
+                    const isBlock = filteredData[dataIndex].Status === 'Block';
+
+                    let backgroundColor = '';
+                    if (isActive) {
+                        backgroundColor = '#8CABD8';
+                    } else if (isBlock) {
+                        backgroundColor = '#D3D3D3';
+                    } else {
+                        backgroundColor = '#838383';
+                    }
+                    return (
+                        <div style={{backgroundColor: backgroundColor,color:'white',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'center',padding:'0.6vh 0.5vw'}}>
+                            {filteredData[dataIndex].Status}
+                        </div>
+                    );
+                }
+            }
+        },
+        {
+            name: 'แอคชั่น',
+            options: {
+                filter: false,
+                sort: false,
+                customBodyRenderLite: (dataIndex: any, rowIndex: any) => {
+                    const isBlock = filteredData[dataIndex].Status === 'Block';
+                    return (
+                        <div style={{ display: 'flex' , gap: '0vw 0.5vw'}}>
+                            <Button
+                                style={{
+                                    backgroundColor: isBlock ? 'black' : 'white',
+                                    color: isBlock ? 'white' : 'black',
+                                    borderRadius: '1vh',
+                                    textAlign: 'center',
+                                    boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',
+                                    padding: '0.6vh 0.5vw'
+                                }}
+                            >
+                                {isBlock ? 'UnBlock' : 'Block'}
+                            </Button>
+                            <Button
+                                style={{
+                                    backgroundColor: 'black',
+                                    color: 'white',
+                                    borderRadius: '1vh',
+                                    textAlign: 'center',
+                                    boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',
+                                    padding: '0.6vh 0.5vw'
+                                }}
+                            >
+                                เพิ่มวัน
+                            </Button>
+                        </div>
+                    );
+                }
+            }
+        },
     ];
 
     const Testdata = [
-        ['WEKLWJIPWSER', 'Lorem01', 'M5', '20 วัน แถม 5 วัน', '2023/02/03 23:30:45', 'Next day', '2023/02/04 00:00:00', '2023/03/01 23:59:59'],
-        ['WOERUIHIVDHI', 'Lorem01', 'M5', '20 วัน แถม 5 วัน', '2023/02/03 17:38:45', 'Next day', '2023/02/04 00:00:00', '2023/03/01 23:59:59'],
-        ['UWH499WDA', 'Lorem02', 'M5', '20 วัน แถม 5 วัน', '2023/02/03 23:30:45', 'Next day', '2023/02/03 00:00:00', '2023/02/28 23:59:59'],
-        ['UWH49949WWQ', 'Lorem04', 'M5', '15 วัน แถม 5 วัน', '2023/02/03 13:10:18', 'Immediately', '2023/02/02 22:10:12', '2023/2/18 23:59:59']
+        ['WEKLWJIPWSER', 'Lorem01', 'M4', '20 วัน แถม 5 วัน', '2023/02/03 23:30:45', 'Next day', '2023/02/04 00:00:00', '2023/03/01 23:59:59'],
+        ['WOERUIHIVDHI', 'Lorem01', 'M4', '20 วัน แถม 5 วัน', '2023/02/03 17:38:45', 'Next day', '2023/02/04 00:00:00', '2023/03/01 23:59:59'],
+        ['UWH499WDA', 'Lorem02', 'M4', '20 วัน แถม 5 วัน', '2023/02/03 23:30:45', 'Next day', '2023/02/03 00:00:00', '2023/02/28 23:59:59'],
+        ['UWH49949WWQ', 'Lorem04', 'M4', '15 วัน แถม 5 วัน', '2023/02/03 13:10:18', 'Immediately', '2023/02/02 22:10:12', '2023/2/18 23:59:59']
     ];
 
 
@@ -122,7 +186,7 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
                     styleOverrides: {
                         root: {
                             // padding: '16px 1.5vw'
-                            padding: '16px 1.5vw'
+                            padding: '1.5vh 1.5vw'
                         }
                     }
                 }
@@ -130,9 +194,9 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
         });
 
     return (
-        <div style={{ padding: '5vh 2.5vw' }}>
+        <div style={{ padding: '5vh 2vw' }}>
             <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <div style={{ width: '100%' }}>
+                <div style={{ width: '110%' }}>
                     <HeaderBody activeCount={activeCount} unactiveCount={unactiveCount} massageCountTotal={massageCountTotal} messageReceivedTotal={messageReceivedTotal} messageMissedTotal={messageMissedTotal} />
                     <ThemeProvider theme={getMuiTheme()}>
                         <MUIDataTable

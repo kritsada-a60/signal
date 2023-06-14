@@ -1,0 +1,8 @@
+.custom-responsive-table {
+  position: relative;
+  height: 12vh;
+}
+
+.MUIDataTable-responsiveBase .MuiTablePagination-root {
+  visibility: visible;
+}

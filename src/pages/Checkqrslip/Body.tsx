@@ -9,6 +9,7 @@ import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import HeaderBody from "./HeaderBody"
+import axios from 'axios'
 
 export interface IBodyPageProps {}
 
@@ -26,16 +27,36 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
         navigate('/deshboard');
     };
 
+    const [data, setData] = useState<any[]>([]);
 
-    const Testcolumns = [
+    useEffect(() => {
+    const fetchData = async () => {
+        try {
+        const response = await axios.get('http://localhost:4000/images');
+        setData(response.data)
+        console.log(response.data);
+        } catch (error) {
+        console.error(error);
+        }
+    };
+    
+    fetchData();
+    }, []);
+
+    const filteredData = data.filter(item => item.SignalName === "M4");
+
+    const Testdata2 = data.map((item) => [
+        item.UID,
+        <img src={`http://localhost:4000/api/image/${item.Image}`} alt="Image" style={{ width: '100px', height: 'auto' }} />,
+    ]);
+
+    console.log(Testdata2,'check')
+
+
+
+    const Testcolumns2 = [
         'UUID-LINE',
         'Name',
-        'Signal',
-        'Package',
-        'วัน-เวลาที่ชำระ',
-        'รูปแบบเริ่มใช้งาน',
-        'วันที่ที่เริ่มใช้งาน',
-        'วันที่สิ้นสุด',
         'Status',
         'แอคชั่น',
     ];
@@ -58,7 +79,10 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
         download: false,
         print: false,
         selectableRowsHeader: false,
-        selectableRowsHideCheckboxes: true
+        selectableRowsHideCheckboxes: true,
+        rowsPerPageOptions: [1,5],
+        page: 0,
+        rowsPerPage: 5,
     };
 
     const getMuiTheme = () =>
@@ -76,15 +100,20 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
         });
 
     return (
-        <div style={{ padding: '5vh 2.5vw' }}>
+        <div style={{ padding: '5vh 2vw' }}>
             <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <div style={{ width: '100%' }}>
-                    <HeaderBody/>
+                <div style={{ width: '110%' }}>
+                    <div style={{backgroundColor:'white',padding:'3vh 1vw',display: 'flex',justifyContent: 'center',fontSize:'1.5rem'}}>
+                        {/* <div style={{display:'flex',marginTop:'1vh'}}>
+                            123
+                        </div> */}
+                    ตรวจสอบการโอนเงิน
+                    </div>
                     <ThemeProvider theme={getMuiTheme()}>
                         <MUIDataTable
                             title={'DeshBoard'}
-                            data={Testdata}
-                            columns={Testcolumns}
+                            data={Testdata2}
+                            columns={Testcolumns2}
                             options={options}
                         />
                     </ThemeProvider>

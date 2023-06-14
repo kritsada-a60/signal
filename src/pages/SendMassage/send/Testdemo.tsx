@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -20,6 +20,8 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { Action } from '@devexpress/dx-react-core';
+import axios from 'axios'
+
 
 function createData(
   name: string,
@@ -36,50 +38,55 @@ function createData(
     carbs,
     protein,
     price,
-    history: [
-      {
-        UUIDLINE: 'WEKLWJIPWSER',
-        MyName:'Lorem01',
-        Signal:'M4',
-        Package:'20 วัน แถม 5 วัน',
-        MyDate:'2023/02/03 23:30:45',
-        FormatStart:'Next day',
-        StartDate:'2023/02/04 00:00:00',
-        EndDate:'2023/03/01 23:59:59',
-      },
-      {
-        UUIDLINE: 'WOERUIHIVDHI',
-        MyName:'Lorem01',
-        Signal:'M4',
-        Package:'20 วัน แถม 5 วัน',
-        MyDate:'2023/02/03 17:38:45',
-        FormatStart:'Next day',
-        StartDate:'2023/02/04 00:00:00',
-        EndDate:'2023/03/01 23:59:59',
-      },
-    ],
+    history: [],
   };
 }
 
-
-
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
-  
-  const [open, setOpen] = React.useState(false);
 
+  const [open, setOpen] = React.useState(false);
+  const [dataPbig, setdataPbig] = useState<any>([]);
+
+  useEffect(() => {
+    const fetchData2 = async () => {
+      try {
+        const response = await axios.post(
+          'https://signal-test.herokuapp.com/noti/list',
+          { aaaa: 'aaa' }
+        );
+        setdataPbig(response.data.data);
+        console.log(response.data.data, 'PBIG');
+      } catch (error) {
+        console.error(error, 'PBIG');
+      }
+    };
+    fetchData2();
+  }, []);
+
+  const updatedRow = {
+    ...row,
+    history: (row.history as any[]).map((historyRow: any, index: number) => {
+      const updatedHistoryRow = {
+        ...historyRow,
+        ...(dataPbig[index] || {}),
+      };
+      return updatedHistoryRow;
+    }),
+  };
+  console.log(updatedRow,'w8')
   return (
     <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' ,margin:'0vw'} }}>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset', margin: '0vw' } }}>
         <TableCell component="th" scope="row" width={100}>
-            {row.name}
-            <IconButton
+          {row.name}
+          <IconButton
             aria-label="expand row"
             size="small"
             onClick={() => setOpen(!open)}
-            >
+          >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
+          </IconButton>
         </TableCell>
       </TableRow>
       <TableRow>
@@ -97,19 +104,21 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     <TableCell>รูปแบบเริ่มใช้งาน</TableCell>
                     <TableCell>วันที่ที่เริ่มใช้งาน</TableCell>
                     <TableCell>วันที่สิ้นสุด</TableCell>
+                    <TableCell>ข้อความที่ส่งไป</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow>
-                    <TableCell>{historyRow.UUIDLINE}</TableCell>
-                    <TableCell>{historyRow.MyName}</TableCell>
-                    <TableCell>{historyRow.Signal}</TableCell>
-                    <TableCell>{historyRow.Package}</TableCell>
-                    <TableCell>{historyRow.MyDate}</TableCell>
-                    <TableCell>{historyRow.FormatStart}</TableCell>
-                    <TableCell>{historyRow.StartDate}</TableCell>
-                    <TableCell>{historyRow.EndDate}</TableCell>
+                  {updatedRow.history.map((historyRow, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{historyRow.c_uid}</TableCell>
+                      <TableCell>{historyRow.c_displayname}</TableCell>
+                      <TableCell>{historyRow.Signal}</TableCell>
+                      <TableCell>{historyRow.Package}</TableCell>
+                      <TableCell>{historyRow.MyDate}</TableCell>
+                      <TableCell>{historyRow.FormatStart}</TableCell>
+                      <TableCell>{historyRow.StartDate}</TableCell>
+                      <TableCell>{historyRow.EndDate}</TableCell>
+                      <TableCell>{historyRow.CountSend}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -121,6 +130,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     </React.Fragment>
   );
 }
+
 
 const rows = [
   createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
@@ -136,11 +146,11 @@ const rows2 = [
   createData('00:30:00', 237, 9.0, 37, 4.3, 4.99),
   createData('00:45:00', 262, 16.0, 24, 6.0, 3.79),
   createData('01:00:00', 305, 3.7, 67, 4.3, 2.5),
-  // createData('01:15:00', 356, 16.0, 49, 3.9, 1.5),
-  // createData('01:35:00', 356, 16.0, 49, 3.9, 1.5),
-  // createData('01:45:00', 356, 16.0, 49, 3.9, 1.5),
-  // createData('02:00:00', 356, 16.0, 49, 3.9, 1.5),
-  // createData('02:15:00', 356, 16.0, 49, 3.9, 1.5),
+  createData('01:15:00', 356, 16.0, 49, 3.9, 1.5),
+  createData('01:35:00', 356, 16.0, 49, 3.9, 1.5),
+  createData('01:45:00', 356, 16.0, 49, 3.9, 1.5),
+  createData('02:00:00', 356, 16.0, 49, 3.9, 1.5),
+  createData('02:15:00', 356, 16.0, 49, 3.9, 1.5),
 ];
 
 const Search = styled('div')(({ theme }) => ({
@@ -211,23 +221,12 @@ export default function CollapsibleTable() {
             </Table>
             <div style={{display:'flex'}}>
                 <p style={{display:'block'}}>
-                    <div style={{width:'15vw',background:'white',display:'flex',justifyContent:'flex-end'}}>
-                        จำนวนข้อความที่ยังไม่ได้รับ
-                    </div>
-                    <div style={{width:'15vw',background:'white',display:'flex',justifyContent:'flex-end',marginTop:'3vh',fontSize:'1.5rem',fontWeight:'bold'}}>
-                        2
-                    </div>
-                </p>
-                <p style={{display:'block'}}>
                     <div style={{width:'15vw',background:'white',display:'flex',justifyContent:'center'}}>
-                        แอคชั่น
+                        จำนวนข้อความที่ได้รับ
                     </div>
-                    <div style={{width:'15vw',background:'white',display:'flex',justifyContent:'center',marginTop:'2vh'}}>
-                        <button style={{width:'5vw',height:'4vh',background:'white',display:'flex',justifyContent:'center',alignItems:'center',color:'#FFFFFF',backgroundColor:'#D21E1E',border:'none',borderRadius:'1vh',cursor:'pointer'}}>
-                            Resend All
-                        </button>
+                    <div style={{width:'15vw',background:'white',display:'flex',justifyContent:'center',marginTop:'3vh',fontSize:'1.5rem',fontWeight:'bold',color:'#51D456'}}>
+                        5
                     </div>
-                    
                 </p>
             </div>
         </TableContainer>

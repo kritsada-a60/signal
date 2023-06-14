@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -20,6 +20,8 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { Action } from '@devexpress/dx-react-core';
+import axios from 'axios'
+
 
 function createData(
   name: string,
@@ -70,6 +72,32 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   
   const [open, setOpen] = React.useState(false);
 
+  const [data, setData] = useState<any[]>([]);
+
+  const [dataPbig, setdataPbig] = useState<any[]>([]);
+
+  const [apiData, setApiData] = useState<any[]>([]);
+
+
+  useEffect(() => {
+      const fetchData2 = async () => {
+          try {
+          const response = await axios.post('https://signal-test.herokuapp.com/noti/list',{
+              aaaa:"aaa"
+          });
+          setApiData(response.data.data)
+          console.log(response.data.data,'PBIG');
+          } catch (error) {
+          console.error(error,'PBIG');
+          }
+      };
+      fetchData2();
+  }, []);
+
+  const receivedMessagesCount = apiData.filter(item => item.ml_response === "success").length;
+
+
+
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' ,margin:'0vw'} }}>
@@ -103,17 +131,17 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow>
-                    <TableCell>{historyRow.UUIDLINE}</TableCell>
-                    <TableCell>{historyRow.MyName}</TableCell>
-                    <TableCell>{historyRow.Signal}</TableCell>
-                    <TableCell>{historyRow.Package}</TableCell>
-                    <TableCell>{historyRow.MyDate}</TableCell>
-                    <TableCell>{historyRow.FormatStart}</TableCell>
-                    <TableCell>{historyRow.StartDate}</TableCell>
-                    <TableCell>{historyRow.EndDate}</TableCell>
-                    <TableCell>{historyRow.CountSend}</TableCell>
+                  {apiData.filter(item => item.ml_response === "success").map((historyRow) => (
+                    <TableRow key={historyRow.UUIDLINE}>
+                      <TableCell>{historyRow.c_uid}</TableCell>
+                      <TableCell>{historyRow.c_displayname}</TableCell>
+                      <TableCell>{historyRow.Signal}</TableCell>
+                      <TableCell>{historyRow.Package}</TableCell>
+                      <TableCell>{historyRow.MyDate}</TableCell>
+                      <TableCell>{historyRow.FormatStart}</TableCell>
+                      <TableCell>{historyRow.StartDate}</TableCell>
+                      <TableCell>{historyRow.EndDate}</TableCell>
+                      <TableCell>{historyRow.ml_msg}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -140,11 +168,11 @@ const rows2 = [
   createData('00:30:00', 237, 9.0, 37, 4.3, 4.99),
   createData('00:45:00', 262, 16.0, 24, 6.0, 3.79),
   createData('01:00:00', 305, 3.7, 67, 4.3, 2.5),
-  createData('01:15:00', 356, 16.0, 49, 3.9, 1.5),
-  createData('01:35:00', 356, 16.0, 49, 3.9, 1.5),
-  createData('01:45:00', 356, 16.0, 49, 3.9, 1.5),
-  createData('02:00:00', 356, 16.0, 49, 3.9, 1.5),
-  createData('02:15:00', 356, 16.0, 49, 3.9, 1.5),
+  // createData('01:15:00', 356, 16.0, 49, 3.9, 1.5),
+  // createData('01:35:00', 356, 16.0, 49, 3.9, 1.5),
+  // createData('01:45:00', 356, 16.0, 49, 3.9, 1.5),
+  // createData('02:00:00', 356, 16.0, 49, 3.9, 1.5),
+  // createData('02:15:00', 356, 16.0, 49, 3.9, 1.5),
 ];
 
 const Search = styled('div')(({ theme }) => ({
@@ -191,6 +219,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function CollapsibleTable() {
 
+  const [apiCountData, setApiCountData] = useState<any[]>([]);
+
+
+  useEffect(() => {
+      const fetchData2 = async () => {
+          try {
+          const response = await axios.post('https://signal-test.herokuapp.com/noti/list',{
+              aaaa:"aaa"
+          });
+          setApiCountData(response.data.data)
+          } catch (error) {
+          console.error(error,'PBIG');
+          }
+      };
+      fetchData2();
+  }, []);
+
+  const receivedMessagesCount = apiCountData.filter(item => item.ml_response === "success").length;
+
   return (
     <div style={{display:'block '}}>
         <div style={{display:'flex',backgroundColor:'white',justifyContent:'center'}}>
@@ -219,7 +266,7 @@ export default function CollapsibleTable() {
                         จำนวนข้อความที่ได้รับ
                     </div>
                     <div style={{width:'15vw',background:'white',display:'flex',justifyContent:'center',marginTop:'3vh',fontSize:'1.5rem',fontWeight:'bold',color:'#51D456'}}>
-                        5
+                        {receivedMessagesCount}
                     </div>
                 </p>
             </div>

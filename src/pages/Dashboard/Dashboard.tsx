@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from 'react';
 
 import { styled } from '@mui/system';
 import Container from "@mui/material/Container";
@@ -18,11 +18,56 @@ import {
   ValueAxis,
 } from '@devexpress/dx-react-chart-material-ui';
 import { Animation } from '@devexpress/dx-react-chart';
+import axios from "axios";
 
 export interface IDashboardPageProps {}
 
 const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
     const MyCountchart = 5;
+
+    const [data2, setData] = useState<any[]>([]);
+    const [dataPbig, setdataPbig] = useState<any[]>([]);
+    useEffect(() => {
+    const fetchData = async () => {
+        try {
+        const response = await axios.get('http://localhost:4000/data');
+        setData(response.data)
+        console.log(response.data,"Dash");
+        } catch (error) {
+        console.error(error);
+        }
+    };
+
+    fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData2 = async () => {
+            try {
+            const response = await axios.post('https://signal-test.herokuapp.com/payments/list',{
+                sdate:"2023-06-01",
+                edate:"2023-09-31"
+            });
+            setdataPbig(response.data.data)
+            console.log(response.data.data,'PBIG');
+            } catch (error) {
+            console.error(error,'PBIG');
+            }
+        };
+        fetchData2();
+    }, []);
+
+    
+
+    
+
+    const signalCount = data2.length;
+
+    const MembersignalCountM1 = data2.filter(item => item.SignalName === "M1").length;
+    const MembersignalCountM4 = data2.filter(item => item.SignalName === "M4").length;
+    const MembersignalCountM5 = data2.filter(item => item.SignalName === "M5").length;
+    const MembersignalCountM30 = data2.filter(item => item.SignalName === "M30").length;
+    const MembersignalCountVIP = data2.filter(item => item.SignalName === "VIP").length;
 
     const Card = () => (
         <div style={{display:'flex',marginTop:'2vh'}}>
@@ -30,7 +75,7 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
                 Signal - M4
             </div>
             <div style={{width:"10%",fontSize:'1.5rem',color:"#FEC52F",fontWeight:'bold',display:'flex',justifyContent:'flex-end'}}>
-                5
+                {MembersignalCountM4}
             </div>
             <div style={{width:"20%",fontSize:'1rem',display:'flex',justifyContent:'flex-end'}}>
                 ครั้งสะสม
@@ -43,7 +88,7 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
                 Signal - M1
             </div>
             <div style={{width:"10%",fontSize:'1.5rem',color:"#FEC52F",fontWeight:'bold',display:'flex',justifyContent:'flex-end'}}>
-                2
+                {MembersignalCountM1}
             </div>
             <div style={{width:"20%",fontSize:'1rem',display:'flex',justifyContent:'flex-end'}}>
                 ครั้งสะสม
@@ -56,7 +101,7 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
                 Signal - M5
             </div>
             <div style={{width:"10%",fontSize:'1.5rem',color:"#FEC52F",fontWeight:'bold',display:'flex',justifyContent:'flex-end'}}>
-                0
+                {MembersignalCountM5}
             </div>
             <div style={{width:"20%",fontSize:'1rem',display:'flex',justifyContent:'flex-end'}}>
                 ครั้งสะสม
@@ -69,7 +114,7 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
                 Signal - M30
             </div>
             <div style={{width:"10%",fontSize:'1.5rem',color:"#FEC52F",fontWeight:'bold',display:'flex',justifyContent:'flex-end'}}>
-                0
+                {MembersignalCountM30}
             </div>
             <div style={{width:"20%",fontSize:'1rem',display:'flex',justifyContent:'flex-end'}}>
                 ครั้งสะสม
@@ -82,7 +127,7 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
                 Signal - VIP
             </div>
             <div style={{width:"10%",fontSize:'1.5rem',color:"#FEC52F",fontWeight:'bold',display:'flex',justifyContent:'flex-end'}}>
-                0
+                {MembersignalCountVIP}
             </div>
             <div style={{width:"20%",fontSize:'1rem',display:'flex',justifyContent:'flex-end'}}>
                 ครั้งสะสม
@@ -93,8 +138,8 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
     const Mynumber = Number('500')
     const Mychart = (MN:any) => (
         // <Paper style={{width:'50%',borderRadius:'1vh 1vw',border:'1px solid black',height:'100%',padding: '5vh 2.5vw'}}>
-        <div style={{width:'100%'}}>
-            <Paper style={{width:'85.5%',borderRadius:'0',height:'92.4%',padding: '5vh 2.5vw'}}>
+        <div style={{width:'100%',height:'92.5vh'}}>
+            <Paper style={{width:'85.5%',borderRadius:'0',height:'89.3%',padding: '5vh 2.5vw'}}>
                 <Chart
                 data={data}
                 // height={Mynumber}
@@ -106,7 +151,11 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
                     color="#FEC52F"
                 />
                 <ValueAxis/>
-                <Title text="การใช้งาน Signal" />
+                <div style={{display: 'flex',justifyContent:'space-between',alignItems:'center',fontSize:'1vw'}}>
+                    {/* <Title text="การใช้งาน Signal" /> */}
+                    <span>การใช้งาน Signal</span>
+                    <span>จำนวนครั้งสะสมรวม <span style={{color:'#FEC52F',fontSize:'1vw'}}>{MembersignalCountM1+MembersignalCountM4+MembersignalCountM5+MembersignalCountM30+MembersignalCountVIP}</span> ครั้ง</span>
+                </div>
                 <Animation />
                 </Chart>
                 <Card/>
@@ -121,11 +170,11 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
     const LS = localStorage;
 
     const data = [
-        { type: 'M4', count: 5 },
-        { type: 'M1', count: 2 },
-        { type: 'M5', count: 0 },
-        { type: 'M3', count: 0 },
-        { type: 'VIP', count: 0 },
+        { type: 'M1', count: MembersignalCountM1 },
+        { type: 'M4', count: MembersignalCountM4 },
+        { type: 'M5', count: MembersignalCountM5 },
+        { type: 'M30', count: MembersignalCountM30 },
+        { type: 'VIP', count: MembersignalCountVIP },
     ];
 
 
@@ -133,9 +182,13 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = (props) => {
         <div>
             <div style={{backgroundColor:'#D3D3D3', padding:'0vh 0vw 0vh 0vw' ,margin:'0'}}>
               <Header/>
-                <div style={{width:'100%',display:'flex'}}>
-                    <Mychart/>
-                    <Body/>
+                <div style={{ width: '100%', display: 'flex' }}>
+                    <div style={{ width: '35%', overflow: 'hidden' }}>
+                        <Mychart />
+                    </div>
+                    <div style={{ width: '65%', overflow: 'hidden' }}>
+                        <Body />
+                    </div>
                 </div>
                 {/* <div style={{width:'40%',display:'flex'}}>
                     

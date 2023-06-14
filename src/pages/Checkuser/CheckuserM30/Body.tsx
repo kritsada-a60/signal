@@ -9,6 +9,8 @@ import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import HeaderBody from "./HeaderBody"
+import axios from 'axios'
+import '../Css/BodyPage.css';
 
 export interface IBodyPageProps {}
 
@@ -25,7 +27,56 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
     const navigatea = () => {
         navigate('/deshboard');
     };
+    const [data, setData] = useState<any[]>([]);
 
+    useEffect(() => {
+    const fetchData = async () => {
+        try {
+        const response = await axios.get('http://localhost:4000/userdata');
+        setData(response.data)
+        console.log(response.data);
+        } catch (error) {
+        console.error(error);
+        }
+    };
+
+    fetchData();
+    }, []);
+
+    const filteredData = data.filter(item => item.SignalName === "M30");
+
+    const Testdata2 = filteredData.map((item) => [
+        item.UID,
+        item.Name,
+        item.SignalName,
+        item.Package,
+        item.PaymentDateTime,
+        item.TypeStart,
+        item.StartDate,
+        item.EndDate,
+        item.Status,
+        item.Action,
+    ]);
+
+    console.log(Testdata2,'check')
+
+    const activeCount = data.reduce((count, item) => {
+        if (item.Status === "Active" && item.SignalName === "M30") {
+            return count + 1;
+        }
+        return count;
+    }, 0);
+
+    const unactiveCount = data.reduce((count, item) => {
+        if (item.Status === "UnActive" && item.SignalName === "M30") {
+            return count + 1;
+        }
+        return count;
+    }, 0);
+
+    const massageCountTotal = filteredData.reduce((total, item) => total + item.MassageCount, 0);
+    const messageReceivedTotal = filteredData.reduce((total, item) => total + parseInt(item.MessageReceived), 0);
+    const messageMissedTotal = filteredData.reduce((total, item) => total + parseInt(item.MessageMissed), 0);
 
     const Testcolumns = [
         'UUID-LINE',
@@ -58,7 +109,10 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
         download: false,
         print: false,
         selectableRowsHeader: false,
-        selectableRowsHideCheckboxes: true
+        selectableRowsHideCheckboxes: true,
+        rowsPerPageOptions: [1,5],
+        page: 0,
+        rowsPerPage: 5,
     };
 
     const getMuiTheme = () =>
@@ -79,11 +133,11 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
         <div style={{ padding: '5vh 2.5vw' }}>
             <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                 <div style={{ width: '100%' }}>
-                    <HeaderBody/>
+                    <HeaderBody activeCount={activeCount} unactiveCount={unactiveCount} massageCountTotal={massageCountTotal} messageReceivedTotal={messageReceivedTotal} messageMissedTotal={messageMissedTotal} />
                     <ThemeProvider theme={getMuiTheme()}>
                         <MUIDataTable
                             title={'DeshBoard'}
-                            data={Testdata}
+                            data={Testdata2}
                             columns={Testcolumns}
                             options={options}
                         />

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component ,useEffect, useState } from "react";
 
 
 import { styled } from '@mui/system';
@@ -8,11 +8,31 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { Typography } from "@mui/material";
 import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 export interface IHeaderBodyProps {}
 
 
 const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
+
+    const [apiCountData, setApiCountData] = useState<any[]>([]);
+
+
+    useEffect(() => {
+        const fetchData2 = async () => {
+            try {
+            const response = await axios.post('https://signal-test.herokuapp.com/noti/list',{
+                aaaa:"aaa"
+            });
+            setApiCountData(response.data.data)
+            } catch (error) {
+            console.error(error,'PBIG');
+            }
+        };
+        fetchData2();
+    }, []);
+
+    const receivedMessagesCount = apiCountData.filter(item => item.ml_response === "success").length;
   
     const LS = localStorage;
 
@@ -118,7 +138,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = (props) => {
                     กลับ
                 </Button>
                 <div style={{fontSize:'1.5rem',margin:'0vh 0.5vw',display:'flex',justifyContent:'center',alignItems:'center'}}>ข้อความที่ได้รับ</div>
-                <div style={{fontSize:'1.5rem',margin:'0vh 0vw 0vh 25vw',display:'flex',justifyContent:'center',color:'#51D456',alignItems:'center'}}>5</div>
+                <div style={{fontSize:'1.5rem',margin:'0vh 0vw 0vh 25vw',display:'flex',justifyContent:'center',color:'#51D456',alignItems:'center'}}>{receivedMessagesCount}</div>
                 <div style={{fontSize:'1rem',margin:'0vh 0.5vw',display:'flex',justifyContent:'center',alignItems:'center'}}>ข้อความ</div>
             </div>
         </div>

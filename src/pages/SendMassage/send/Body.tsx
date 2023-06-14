@@ -11,6 +11,8 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import HeaderBody from "./HeaderBody"
 import { StyledEngineProvider } from '@mui/material/styles';
 import Demo from './demo';
+import Testdemo2 from './Testdemo2';
+
 
 export interface IBodyPageProps {}
 

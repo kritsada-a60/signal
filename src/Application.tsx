@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/Home';
 import MainPage from './pages/Header';
 import DashboardPage from './pages/Dashboard/Dashboard';
-import CheckuserPage from './pages/Checkuser/Checkuser';
+import CheckuserPage from './pages/Checkuser/CheckuserM4/Checkuser';
+import Checkuqrslip from './pages/Checkqrslip/Checkuqrslip';
 import CheckuserM1Page from './pages/Checkuser/CheckuserM1/Checkuser';
 import CheckuserM5Page from './pages/Checkuser/CheckuserM5/Checkuser';
 import CheckuserM30Page from './pages/Checkuser/CheckuserM30/Checkuser';
@@ -32,6 +33,7 @@ const Application: React.FunctionComponent<IApplicationProps> = () => {
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/checkuser" element={<CheckuserPage />} />
+                <Route path="/checkqrslip" element={<Checkuqrslip />} />
                 <Route path="/checkuserm1" element={<CheckuserM1Page />} />
                 <Route path="/checkuserm5" element={<CheckuserM5Page />} />
                 <Route path="/checkuserm30" element={<CheckuserM30Page />} />

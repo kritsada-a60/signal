@@ -10,10 +10,10 @@ import Header from "../Header"
 import Body from "./Body"
 import HeaderBody from "./HeaderBody"
 
-export interface ICheckuserPageProps {}
+export interface ICheckuqrslipPageProps {}
 
 
-const CheckuserPage: React.FunctionComponent<ICheckuserPageProps> = (props) => {
+const CheckuqrslipPage: React.FunctionComponent<ICheckuqrslipPageProps> = (props) => {
   
     const LS = localStorage;
 
@@ -27,4 +27,4 @@ const CheckuserPage: React.FunctionComponent<ICheckuserPageProps> = (props) => {
     );
 };
 
-export default CheckuserPage;
+export default CheckuqrslipPage;

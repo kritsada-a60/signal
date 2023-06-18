@@ -33,7 +33,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = ({ totalAmount , t
             <div style={{backgroundColor:'#8CABD8',color:'#FFFFFF',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'0px solid #4E4E4E'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>Signal - M1</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนเงินสุทธิ(บาท)</p>
-                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{totalAmount}</p>
+                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{totalAmount.toFixed(2)}</p>
             </div>
         </div>
     );
@@ -43,7 +43,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = ({ totalAmount , t
             <div style={{backgroundColor:'#838383',color:'#FFFFFF',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'0px solid #4E4E4E'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>Signal - M4</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนเงินสุทธิ(บาท)</p>
-                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{totalAmountM4Pbig}</p>
+                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{totalAmountM4Pbig.toFixed(2)}</p>
             </div>
         </div>
     );
@@ -53,7 +53,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = ({ totalAmount , t
             <div style={{backgroundColor:'#FEC52F',color:'#292929',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'0px solid #4E4E4E'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>Signal - M5</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนเงินสุทธิ(บาท)</p>
-                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{totalAmountM5}</p>
+                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{totalAmountM5.toFixed(2)}</p>
             </div>
         </div>
     );
@@ -63,7 +63,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = ({ totalAmount , t
             <div style={{backgroundColor:'#34A446',color:'#FFFFFF',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'0px solid #4E4E4E'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>Signal - M30</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนเงินสุทธิ(บาท)</p>
-                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{totalAmountM30}</p>
+                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{totalAmountM30.toFixed(2)}</p>
             </div>
         </div>
     );
@@ -73,7 +73,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = ({ totalAmount , t
             <div style={{backgroundColor:'#CA2E46',color:'#FFFFFF',width:'11.667vw',height:'16.666vh',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'left',lineHeight:'0.1vh',margin:'1.5vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',border:'0px solid #4E4E4E'}}>
                 <p style={{margin:'3vh 0 0 2vw',fontSize:'1.5rem'}}>Signal - VIP</p>
                 <p style={{margin:'4vh 0 0 2vw',fontSize:'1rem'}}>จำนวนเงินสุทธิ(บาท)</p>
-                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{totalAmountVIP}</p>
+                <p style={{margin:'4vh 0 0 2vw',fontWeight:'bold',fontSize:'1.75rem'}}>{totalAmountVIP.toFixed(2)}</p>
             </div>
         </div>
     );

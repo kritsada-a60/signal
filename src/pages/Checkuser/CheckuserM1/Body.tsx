@@ -92,8 +92,70 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
         'รูปแบบเริ่มใช้งาน',
         'วันที่ที่เริ่มใช้งาน',
         'วันที่สิ้นสุด',
-        'Status',
-        'แอคชั่น',
+        // 'Status',
+        {
+            name: 'Status',
+            options: {
+                filter: false,
+                sort: false,
+                customBodyRenderLite: (dataIndex: any, rowIndex: any) => {
+                    const isActive = filteredData[dataIndex].Status === 'Active';
+                    const isBlock = filteredData[dataIndex].Status === 'Block';
+
+                    let backgroundColor = '';
+                    if (isActive) {
+                        backgroundColor = '#8CABD8';
+                    } else if (isBlock) {
+                        backgroundColor = '#D3D3D3';
+                    } else {
+                        backgroundColor = '#838383';
+                    }
+                    return (
+                        <div style={{backgroundColor: backgroundColor,color:'white',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'center',padding:'0.6vh 0.5vw'}}>
+                            {filteredData[dataIndex].Status}
+                        </div>
+                    );
+                }
+            }
+        },
+        {
+            name: 'แอคชั่น',
+            options: {
+                filter: false,
+                sort: false,
+                customBodyRenderLite: (dataIndex: any, rowIndex: any) => {
+                    const isBlock = filteredData[dataIndex].Status === 'Block';
+                    return (
+                        <div style={{ display: 'flex' , gap: '0vw 0.5vw'}}>
+                            <Button
+                                style={{
+                                    backgroundColor: isBlock ? 'black' : 'white',
+                                    color: isBlock ? 'white' : 'black',
+                                    borderRadius: '1vh',
+                                    textAlign: 'center',
+                                    boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',
+                                    padding: '0.6vh 0.5vw'
+                                }}
+                            >
+                                {isBlock ? 'UnBlock' : 'Block'}
+                            </Button>
+                            <Button
+                                style={{
+                                    backgroundColor: 'black',
+                                    color: 'white',
+                                    borderRadius: '1vh',
+                                    textAlign: 'center',
+                                    boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)',
+                                    padding: '0.6vh 0.5vw'
+                                }}
+                            >
+                                เพิ่มวัน
+                            </Button>
+                        </div>
+                    );
+                }
+            }
+        },
     ];
 
     const Testdata = [

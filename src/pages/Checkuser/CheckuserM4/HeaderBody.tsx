@@ -107,7 +107,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = ({ activeCount , u
                 <Button onClick={navigatetonext} style={{width:'13.698vw',height:'5.185vh',color:'#FFFFFF',backgroundColor:'#292929',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
                     ตรวจสอบ Signal M4
                 </Button>
-                <Button onClick={navigatetonextm1} style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
+                {/* <Button onClick={navigatetonextm1} style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
                     ตรวจสอบ Signal M1
                 </Button>
                 <Button onClick={navigatetonextm5} style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
@@ -118,7 +118,7 @@ const HeaderBody: React.FunctionComponent<IHeaderBodyProps> = ({ activeCount , u
                 </Button>
                 <Button onClick={navigatetonextvip} style={{width:'13.698vw',height:'5.185vh',color:'#292929',backgroundColor:'#FFFFFF',borderRadius:'1vh',margin:'0vh 0.5vw',boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.15)'}}>
                     ตรวจสอบ Signal VIP
-                </Button>
+                </Button> */}
             </div>
             <div style={{display:'flex',marginTop:'1vh'}}>
                 <Card/>

@@ -11,6 +11,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import HeaderBody from "./HeaderBody"
 import axios from 'axios'
 import '../Css/BodyPage.css';
+import moment, { Moment } from 'moment';
 
 export interface IBodyPageProps {}
 
@@ -44,6 +45,25 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
     fetchData();
     }, []);
 
+    const [apiData, setApiData] = useState<any[]>([]);
+
+
+    useEffect(() => {
+        const fetchData2 = async () => {
+            try {
+            const response = await axios.post('https://signal-test.herokuapp.com/payments/list',{
+                sdate:"2023-06-01",
+                edate:"2023-09-31"
+            });
+            setApiData(response.data.data)
+            console.log(response.data.data,'PBIG');
+            } catch (error) {
+            console.error(error,'PBIG');
+            }
+        };
+        fetchData2();
+    }, []);
+
     const filteredData = data.filter(item => item.SignalName === "M4");
 
     const Testdata2 = filteredData.map((item) => [
@@ -59,17 +79,34 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
         item.Action,
     ]);
 
-    console.log(Testdata2,'check')
+    const filteredData2 = apiData.filter(item => item.sc_name === "M5 (M4)");
 
-    const activeCount = data.reduce((count, item) => {
-        if (item.Status === "Active" && item.SignalName === "M4") {
+
+    const Testdata3 = filteredData2.map((item) => [
+        item.c_uid.slice(0, 10),
+        item.c_displayname,
+        item.p_name,
+        item.pd_title,
+        moment(item.pm_trx_qr_datetime).format('D/M/YYYY HH:mm:ss [GMT]'),
+        item.p_name,
+        moment(item.pm_sdate).format('D/M/YYYY HH:mm:ss [GMT]'),
+        moment(item.pm_edate).format('D/M/YYYY HH:mm:ss [GMT]'),
+        item.pms_name,
+        // item.Action,
+    ]);
+
+    console.log(Testdata2,'check')
+    console.log(Testdata3,'checkPbig')
+
+    const activeCount = apiData.reduce((count, item) => {
+        if (item.pd_day >= 1 && item.sc_name === "M5 (M4)") {
             return count + 1;
         }
         return count;
     }, 0);
 
-    const unactiveCount = data.reduce((count, item) => {
-        if (item.Status === "UnActive" && item.SignalName === "M4") {
+    const unactiveCount = apiData.reduce((count, item) => {
+        if (item.pd_day === 0 && item.sc_name === "M5 (M4)") {
             return count + 1;
         }
         return count;
@@ -96,8 +133,8 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
                 filter: false,
                 sort: false,
                 customBodyRenderLite: (dataIndex: any, rowIndex: any) => {
-                    const isActive = filteredData[dataIndex].Status === 'Active';
-                    const isBlock = filteredData[dataIndex].Status === 'Block';
+                    const isActive = filteredData2[dataIndex].pd_day >= 1;
+                    const isBlock = filteredData2[dataIndex].pd_day === 0;
 
                     let backgroundColor = '';
                     if (isActive) {
@@ -109,7 +146,7 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
                     }
                     return (
                         <div style={{backgroundColor: backgroundColor,color:'white',borderRadius:'1vh',display:'flex',flexDirection:'column',textAlign:'center',padding:'0.6vh 0.5vw'}}>
-                            {filteredData[dataIndex].Status}
+                            {filteredData2[dataIndex].pd_day + " วัน"}
                         </div>
                     );
                 }
@@ -121,7 +158,7 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
                 filter: false,
                 sort: false,
                 customBodyRenderLite: (dataIndex: any, rowIndex: any) => {
-                    const isBlock = filteredData[dataIndex].Status === 'Block';
+                    const isBlock = filteredData2[dataIndex].pd_day === 0;
                     return (
                         <div style={{ display: 'flex' , gap: '0vw 0.5vw'}}>
                             <Button
@@ -201,7 +238,7 @@ const BodyPage: React.FunctionComponent<IBodyPageProps> = (props) => {
                     <ThemeProvider theme={getMuiTheme()}>
                         <MUIDataTable
                             title={'DeshBoard'}
-                            data={Testdata2}
+                            data={Testdata3}
                             columns={Testcolumns}
                             options={options}
                         />
